@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./NewTileForm.css";
+import { connect } from "react-redux";
+import { createTile } from "./actions";
 
-const NewTileForm = () => {
+const NewTileForm = ({ tiles, onCreatePressed }) => {
   const [inputValue, setInputValue] = useState("");
 
   return (
@@ -13,9 +15,26 @@ const NewTileForm = () => {
         placeholder="Type your Tile Text"
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button classNam="new-tile-button">Create Tile</button>
+      <button
+        onClick={() => {
+          const isDuplicate = tiles.some((tile) => tile.text === inputValue);
+          if (!isDuplicate) {
+            onCreatePressed(inputValue);
+            setInputValue("");
+          }
+        }}
+        classNam="new-tile-button"
+      >
+        Create Tile
+      </button>
     </div>
   );
 };
 
-export default NewTileForm;
+const mapStateToProps = (state) => ({
+  tiles: state.tiles,
+});
+const mapDispatchToProps = (dispatch) => ({
+  onCreatePressed: (text) => dispatch(createTile(text)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(NewTileForm);
