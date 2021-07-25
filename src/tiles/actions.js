@@ -11,3 +11,10 @@ export const removeTile = (text) => ({
   type: REMOVE_TILE,
   payload: { text },
 });
+
+export const MARK_TILE_DONE = "MARK_TILE_DONE";
+
+export const markTileDone = (text) => ({
+  type: MARK_TILE_DONE,
+  payload: { text },
+});

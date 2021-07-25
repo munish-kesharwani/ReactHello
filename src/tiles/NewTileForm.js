@@ -23,7 +23,7 @@ const NewTileForm = ({ tiles, onCreatePressed }) => {
             setInputValue("");
           }
         }}
-        classNam="new-tile-button"
+        className="new-tile-button"
       >
         Create Tile
       </button>
