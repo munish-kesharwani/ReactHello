@@ -3,18 +3,22 @@ import "./Tile.css";
 
 const Tile = ({ tile, onRemovePressed, onCompletePressed }) => (
   <div className="tile-container">
-    <h3>{tile.text}</h3>
+    <h3>{tile.name}</h3>
+
+    <h3>{tile.email}</h3>
+
+    <p> {tile.message}</p>
     <div className="buttons-container">
       {tile.isCompleted ? null : (
         <button
-          onClick={() => onCompletePressed(tile.text)}
+          onClick={() => onCompletePressed(tile.name)}
           className="completed-button"
         >
           Mark Done
         </button>
       )}
       <button
-        onClick={() => onRemovePressed(tile.text)}
+        onClick={() => onRemovePressed(tile.name)}
         className="remove-button"
       >
         Delete

@@ -4,28 +4,49 @@ import { connect } from "react-redux";
 import { createTile } from "./actions";
 
 const NewTileForm = ({ tiles, onCreatePressed }) => {
-  const [inputValue, setInputValue] = useState("");
+  const [name, setInputName] = useState("");
+  const [email, setInputEmail] = useState("");
+  const [message, setInputMessage] = useState("");
 
   return (
     <div className="new-tile-form">
       <input
         className="new-tile-input"
         type="text"
-        value={inputValue}
-        placeholder="Type your Tile Text"
-        onChange={(e) => setInputValue(e.target.value)}
+        value={name}
+        placeholder="Type your Name"
+        onChange={(e) => setInputName(e.target.value)}
       />
+
+      <input
+        className="new-tile-input"
+        type="text"
+        value={email}
+        placeholder="Type your email"
+        onChange={(e) => setInputEmail(e.target.value)}
+      />
+
+      <input
+        className="new-tile-input"
+        type="text"
+        value={message}
+        placeholder="Type your Message"
+        onChange={(e) => setInputMessage(e.target.value)}
+      />
+
       <button
         onClick={() => {
-          const isDuplicate = tiles.some((tile) => tile.text === inputValue);
+          const isDuplicate = tiles.some((tile) => tile.name === name);
           if (!isDuplicate) {
-            onCreatePressed(inputValue);
-            setInputValue("");
+            onCreatePressed(name, email, message);
+            setInputName("");
+            setInputEmail("");
+            setInputMessage("");
           }
         }}
         className="new-tile-button"
       >
-        Create Tile
+        Submit Feedback
       </button>
     </div>
   );
@@ -35,6 +56,7 @@ const mapStateToProps = (state) => ({
   tiles: state.tiles,
 });
 const mapDispatchToProps = (dispatch) => ({
-  onCreatePressed: (text) => dispatch(createTile(text)),
+  onCreatePressed: (name, email, message) =>
+    dispatch(createTile(name, email, message)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(NewTileForm);
