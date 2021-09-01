@@ -23,8 +23,17 @@ export const feedbacklist = (state = [], action) => {
       return feedbacklist;
     }
     // in progress or error are no differently handled (currently) TODO
-    case LOAD_IN_PROGRESS:
     case LOAD_ERROR:
+      const err_list = [
+        {
+          name: "localhost",
+          email: "error handler",
+          message: "Apologies but error in loading feedback",
+        },
+      ];
+      return err_list;
+    case LOAD_IN_PROGRESS:
+
     default:
       return state;
   }

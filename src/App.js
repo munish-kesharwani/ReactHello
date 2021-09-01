@@ -16,6 +16,8 @@ const App = () => (
   <div className="App">
     <h1> Feedback Section</h1>
     <FeedbackList />
+    <h1> Todo Section</h1>
+    <Tiles />
   </div>
 );
 
